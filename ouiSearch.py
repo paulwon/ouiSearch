@@ -9,6 +9,19 @@ downloadUrl = "https://standards-oui.ieee.org/"
 
 def printMsgAndExit(msg):
     print("---", msg)
+    print("Existing ...")
+    exit(1)
+
+def printUsageAndExit(msg):
+    print(msg)
+    usage = """Usage examples:
+    {0} --update // Download or update the oui file 
+    {0} 1111:2222:3333
+    {0} 111122223333
+    {0} 111122
+    """.format(sys.argv[0])
+    print(usage)
+    print("Exiting ...")
     exit(1)
 
 def formatFile():
@@ -53,25 +66,18 @@ def downloadFile():
     count = len(open(fileOui).readlines( ))
     print("Number of lines of the oui file after the update:",count)
     formatFile()
-    printMsgAndExit("OUI file has been downloaded and formated. Existing.")
+    printMsgAndExit("OUI file has been downloaded and formated. ")
 
-def printUsageAndExit():
-    usage = """Usage examples:
-    {0} --update // Download or update the oui file 
-    {0} 1111:2222:3333
-    {0} 111122223333
-    {0} 111122
-    """.format(sys.argv[0])
-    print(usage)
-    print("Exiting ...")
-    exit(1)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        printUsageAndExit()
+        printUsageAndExit("Wrong usage.")
     if not os.path.exists(fileOui):
-        printMsgAndExit("File does not exit. Please download the oui file by using the '--update' option first. Exiting ...")
-    if sys.argv[1] == "--update":
+        printUsageAndExit("File does not exit. Please download the oui file by using the '--update' option first. ")
+    if sys.argv[1].strip()[0:2] == "--" and sys.argv[1].strip() != "--update":
+        printUsageAndExit("Wrong usage.")
+    if sys.argv[1].strip() == "--update":
         downloadFile()
     searchStringFormatted = formatSearchString(sys.argv[1].strip())
     search(searchStringFormatted)
