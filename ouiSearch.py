@@ -69,7 +69,6 @@ def downloadFile():
     printMsgAndExit("OUI file has been downloaded and formated. ")
 
 
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         printUsageAndExit("Wrong usage.")
