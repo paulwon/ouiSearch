@@ -25,6 +25,9 @@ def printUsageAndExit(msg):
     exit(1)
 
 def formatFile():
+    '''
+    Format the download OUI file to only leave the info needed for search
+    '''
     os.remove(fileOuiFormatted)
     fileWrite = open(fileOuiFormatted, "a")
     with open(fileOui, 'r') as f:
@@ -32,8 +35,11 @@ def formatFile():
             if '(base 16)' in line:
                 fileWrite.write(line)
     fileWrite.close()
-    
+
 def formatSearchString(searchString):
+    '''
+    Fort the mac address inputted to remove "_" and ":"
+    '''
     searchStringFormatted = searchString.replace("-", "").replace(":", "")
     if len(searchStringFormatted) != 6:
         searchStringFormatted = searchStringFormatted[0:6]
@@ -41,6 +47,9 @@ def formatSearchString(searchString):
     return searchStringFormatted
 
 def search(searchStringFormatted):
+    '''
+    Search the formatted mac OUI in the formatted OUI file
+    '''
     print("--- Search result:")
     with open(fileOuiFormatted, 'r') as f:
         for line in f.readlines():
@@ -53,8 +62,10 @@ def formatTime(timeStamp):
     T_stamp = time.strftime("%Y-%m-%d %H:%M:%S", t_obj)
     return T_stamp
 
-
 def downloadFile():
+    '''
+    Download the latest OUI file from the IEEE website
+    '''
     if os.path.exists(fileOui):
         print("--- File before the update:", formatTime(os.path.getmtime(fileOui)))
         count = len(open(fileOui).readlines( ))
