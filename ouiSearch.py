@@ -3,8 +3,8 @@ import sys
 import requests
 import time
 
-fileOui = "/Users/zwang/projects/ouiSearch/oui.txt"
-fileOuiFormatted  = "/Users/zwang/projects/ouiSearch/ouiFormatted.txt"
+fileOui = os.path.dirname(os.path.realpath(__file__)) + "/oui.txt"
+fileOuiFormatted  = os.path.dirname(os.path.realpath(__file__)) + "/ouiFormatted.txt"
 downloadUrl = "https://standards-oui.ieee.org/"
 
 def printMsgAndExit(msg):
