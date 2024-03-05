@@ -40,7 +40,7 @@ def formatSearchString(searchString):
     '''
     Fort the mac address inputted to remove "_" and ":"
     '''
-    searchStringFormatted = searchString.replace("-", "").replace(":", "")
+    searchStringFormatted = searchString.replace("-", "").replace(":", "").replace(".", "")
     if len(searchStringFormatted) != 6:
         searchStringFormatted = searchStringFormatted[0:6]
     print("--- OUI will be searched:", searchStringFormatted)
@@ -90,4 +90,7 @@ if __name__ == "__main__":
     if sys.argv[1].strip() == "--update":
         downloadFile()
     searchStringFormatted = formatSearchString(sys.argv[1].strip())
+    if searchStringFormatted[1].lower() in ("2", "6", "a", "e"):
+        print("It's a randomized mac address")
+        exit()
     search(searchStringFormatted)
