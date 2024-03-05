@@ -91,6 +91,5 @@ if __name__ == "__main__":
         downloadFile()
     searchStringFormatted = formatSearchString(sys.argv[1].strip())
     if searchStringFormatted[1].lower() in ("2", "6", "a", "e"):
-        print("It's a randomized mac address")
-        exit()
+        printMsgAndExit("It's a randomized mac address")
     search(searchStringFormatted)
